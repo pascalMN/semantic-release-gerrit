@@ -1,0 +1,16 @@
+{
+  "name": "gerrit-release-notes-generator",
+  "private": false,
+  "license": "MIT",
+  "main": "src/generate-notes.js",
+  "scripts": {
+    "build": "tsc --build tsconfig.json && npm run copy:package.json",
+    "clean": "rimraf dist",
+    "copy:package.json": "copy-pkg package.json dist/package.json --only name,version,license,main"
+  },
+  "devDependencies": {
+    "copy-pkg": "^1.0.0",
+    "rimraf": "^2.6.2",
+    "typescript": "^3.0.1"
+  }
+}
