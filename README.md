@@ -1,0 +1,1 @@
+# gerrit-release-notes-generator
