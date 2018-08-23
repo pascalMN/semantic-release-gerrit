@@ -1,8 +1,8 @@
 {
-  "name": "gerrit-release-notes-generator",
+  "name": "semantic-release-gerrit",
   "private": false,
   "license": "MIT",
-  "main": "src/generate-notes.js",
+  "main": "public_api.js",
   "scripts": {
     "build": "tsc --build tsconfig.json && npm run copy:package.json",
     "clean": "rimraf dist",
