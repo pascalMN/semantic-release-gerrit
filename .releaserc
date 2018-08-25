@@ -1,0 +1,21 @@
+{
+  "branch": "master",
+  "verifyConditions": [
+    "@semantic-release/npm",
+    "@semantic-release/github"
+  ],
+  "publish": [
+    "@semantic-release/npm",
+    "@semantic-release/github"
+  ],
+  "success": [
+    "@semantic-release/github"
+  ],
+  "fail": [
+    "@semantic-release/github"
+  ],
+  "generateNotes": {
+    "preset": "angular"
+  },
+  "pkgRoot": "./dist"
+}

@@ -6,11 +6,17 @@
   "scripts": {
     "build": "tsc --build tsconfig.json && npm run copy:package.json",
     "clean": "rimraf dist",
-    "copy:package.json": "copy-pkg package.json dist/package.json --only name,version,license,main"
+    "copy:package.json": "copy-pkg package.json dist/package.json --only name,version,license,main",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "copy-pkg": "^1.0.0",
     "rimraf": "^2.6.2",
+    "semantic-release": "^15.9.9",
     "typescript": "^3.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pascalMN/semantic-release-gerrit.git"
   }
 }
