@@ -7,7 +7,8 @@
     "build": "tsc --build tsconfig.json && npm run copy:package.json",
     "clean": "rimraf dist",
     "copy:package.json": "copy-pkg package.json dist/package.json --only name,version,license,main",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "test": "echo \"TODO: add tests\""
   },
   "devDependencies": {
     "copy-pkg": "^1.0.0",
