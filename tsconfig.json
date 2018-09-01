@@ -3,15 +3,15 @@
     "target": "es5",
     "sourceMap": false,
     "outDir": "dist",
-    "rootDir": ".",
-    "baseUrl": ".",
     "moduleResolution": "node",
     "typeRoots": [
       "node_modules/@types"
     ],
-    "lib": ["dom", "es6"]
+    "lib": ["dom", "es2017"]
   },
+  "include": ["public_api.ts"],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/gerrit/@types"
   ]
 }
