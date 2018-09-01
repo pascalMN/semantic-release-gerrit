@@ -5,8 +5,9 @@ import {FileReader} from "./utils/file-reader";
 import * as compareFunc from 'compare-func';
 
 export class Gerrit {
+  private fileReader = new FileReader(__dirname);
+
   async loadConfig(): Promise<Config> {
-    const fileReader = new FileReader();
     const parserOptions: ParserOptions = {
       headerPattern: /^(\w*)(?:\((.*)\))?: (.*)$/,
       headerCorrespondence: [
@@ -21,10 +22,10 @@ export class Gerrit {
 
     const writerOptions: WriterOptions = {
       ...this.getWriterOptions(),
-      mainTemplate: await fileReader.readFile(`${__dirname}/templates/template.hbs`).toPromise(),
-      headerPartial: await fileReader.readFile(`${__dirname}/templates/header.hbs`).toPromise(),
-      commitPartial: await fileReader.readFile(`${__dirname}/templates/commit.hbs`).toPromise(),
-      footerPartial: await fileReader.readFile(`${__dirname}/templates/footer.hbs`).toPromise(),
+      mainTemplate: await this.fileReader.readFile(`templates/template.hbs`).toPromise(),
+      headerPartial: await this.fileReader.readFile(`templates/header.hbs`).toPromise(),
+      commitPartial: await this.fileReader.readFile(`templates/commit.hbs`).toPromise(),
+      footerPartial: await this.fileReader.readFile(`templates/footer.hbs`).toPromise(),
     };
 
     return {
