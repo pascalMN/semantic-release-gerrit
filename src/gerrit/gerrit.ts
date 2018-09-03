@@ -1,6 +1,9 @@
-import {Config, WriterOptions} from "./@types/config";
+import {Config, ParserOptions, WriterOptions} from "./@types/config";
 import {FileReader} from "./utils/file-reader";
-import {parserOptions, writerOptionsConfig} from "./config";
+import {GERRIT_HOST_CONFIG, parserOptions, writerOptionsConfig} from "./config";
+import {Commit} from "./@types/commit";
+import * as filter from 'conventional-commits-filter';
+import * as parser from 'conventional-commits-parser';
 
 export class Gerrit {
   private fileReader = new FileReader(__dirname);
@@ -18,5 +21,18 @@ export class Gerrit {
       parser: parserOptions,
       writer: writerOptions
     }
+  }
+
+  parseCommits(commits: Commit[], parserOptions: ParserOptions): Commit[] {
+    return filter(commits.map(commit => {
+      return {
+        ...commit,
+        ...parser(commit.message, {
+          referenceActions: GERRIT_HOST_CONFIG.referenceActions,
+          issuePrefixes: GERRIT_HOST_CONFIG.issuePrefixes,
+          ...parserOptions
+        })
+      }
+    }));
   }
 }

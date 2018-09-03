@@ -1,4 +1,4 @@
-import {ParserOptions, WriterOptions} from "./@types/config";
+import {HostConfig, ParserOptions, WriterOptions} from "./@types/config";
 import {Commit} from "./@types/commit";
 import {Context} from "./@types/context";
 import * as compareFunc from 'compare-func';
@@ -89,4 +89,23 @@ export const parserOptions: ParserOptions = {
   noteKeywords: [`BREAKING CHANGE`],
   revertPattern: /^revert:\s([\s\S]*?)\s*This reverts commit (\w*)\./,
   revertCorrespondence: [`header`, `hash`]
+};
+
+export const GERRIT_HOST_CONFIG: HostConfig = {
+  commit: '#/c',
+  issuePrefixes: ['#'],
+  referenceActions: [
+    "close",
+    "closes",
+    "closed",
+    "closing",
+    "fix",
+    "fixes",
+    "fixed",
+    "fixing",
+    "resolve",
+    "resolves",
+    "resolved",
+    "resolving",
+  ]
 };

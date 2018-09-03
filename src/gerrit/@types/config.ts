@@ -26,3 +26,9 @@ export interface Config {
   writer: WriterOptions;
   parser: ParserOptions;
 }
+
+export interface HostConfig {
+  commit: string;
+  issuePrefixes: string[];
+  referenceActions: string[];
+}
