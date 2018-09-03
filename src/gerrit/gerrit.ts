@@ -27,7 +27,7 @@ export class Gerrit {
     return filter(commits.map(commit => {
       return {
         ...commit,
-        ...parser(commit.message, {
+        ...parser.sync(commit.message, {
           referenceActions: GERRIT_HOST_CONFIG.referenceActions,
           issuePrefixes: GERRIT_HOST_CONFIG.issuePrefixes,
           ...parserOptions
