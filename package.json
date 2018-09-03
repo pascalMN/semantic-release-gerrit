@@ -5,8 +5,10 @@
   "main": "public_api.js",
   "scripts": {
     "build": "tsc --build tsconfig.json && npm run copy:templates && npm run copy:package.json",
+    "build:watch": "tsc --build tsconfig.json --watch & npm run copy:templates:watch",
     "clean": "rimraf dist",
     "copy:templates": "cpx src/gerrit/templates/**/*.hbs dist/src/gerrit/templates",
+    "copy:templates:watch": "cpx src/gerrit/templates/**/*.hbs dist/src/gerrit/templates --watch",
     "copy:package.json": "copy-pkg package.json dist/package.json --only name,version,license,main",
     "semantic-release": "semantic-release",
     "test": "echo \"TODO: add tests\""

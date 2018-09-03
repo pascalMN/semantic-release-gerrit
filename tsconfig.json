@@ -9,7 +9,7 @@
     ],
     "lib": ["dom", "es2017"]
   },
-  "include": ["public_api.ts"],
+  "compileOnSave": true,
   "exclude": [
     "node_modules",
     "src/gerrit/@types"
