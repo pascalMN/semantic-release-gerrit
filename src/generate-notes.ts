@@ -21,14 +21,11 @@ export const generateNotes = async (pluginConfig: any, context: any) => {
   const currentTag = nextRelease.gitTag || nextRelease.gitHead;
   const changelogContext = {
     version: nextRelease.version,
-    host: 'http://mock_repository_url:1234',
-    owner: 'mock_owner',
-    repository: 'mock_repository',
+    gerrit: 'http://localhost:8080',
     previousTag,
     currentTag,
+    commit: '#/c',
     linkCompare: currentTag && previousTag,
-    issue: 'mock_issues',
-    commit: 'mock_commit',
   };
 
   return getStream(intoStream.obj(parsedCommits).pipe(writer(changelogContext, config.writer)));

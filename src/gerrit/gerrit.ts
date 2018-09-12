@@ -42,11 +42,15 @@ export class Gerrit {
     return exaca('git', ['ls-remote']).then((r) => {
       const remotes: Map<string, string> = new Map(r.stdout.split('\n').map(line => line.split('\t')));
       commits.forEach(commit => {
-        const remoteData = remotes.get(commit.hash).split('/');
-        commit.review = {
-          changeNumber: Number(remoteData[remoteData.length - 2]),
-          patchSet: Number(remoteData[remoteData.length - 1])
-        } as Review;
+        try {
+          const remoteData = remotes.get(commit.hash).split('/');
+          commit.review = {
+            changeNumber: Number(remoteData[remoteData.length - 2]),
+            patchSet: Number(remoteData[remoteData.length - 1])
+          } as Review;
+        } catch (e) {
+          console.warn(`Cannot find review for commit: ${commit.message}`)
+        }
       })
     });
   }

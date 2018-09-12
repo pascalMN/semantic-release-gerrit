@@ -5,20 +5,12 @@
   {{~header}}
 {{~/if}}
 
-{{~!-- commit link --}} {{#if @root.linkReferences~}}
+{{~!-- commit link --}} {{#if review~}}
   ([{{hash}}](
-  {{~#if @root.repository}}
-    {{~#if @root.host}}
-      {{~@root.host}}/
-    {{~/if}}
-    {{~#if @root.owner}}
-      {{~@root.owner}}/
-    {{~/if}}
-    {{~@root.repository}}
-  {{~else}}
-    {{~@root.repoUrl}}
+  {{~#if @root.gerrit}}
+    {{~@root.gerrit}}
   {{~/if}}/
-  {{~@root.commit}}/{{hash}}))
+  {{~@root.commit}}/{{review.changeNumber}}/{{review.patchSet}}))
 {{~else}}
   {{~hash}}
 {{~/if}}
