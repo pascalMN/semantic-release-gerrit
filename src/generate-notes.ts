@@ -15,6 +15,8 @@ export const generateNotes = async (pluginConfig: any, context: any) => {
 
   const config: Config = await gerrit.loadConfig();
   const parsedCommits: Commit[] = gerrit.parseCommits(commits, config.parser);
+  await gerrit.getReviewData(parsedCommits);
+
   const previousTag = lastRelease.gitTag || lastRelease.gitHead;
   const currentTag = nextRelease.gitTag || nextRelease.gitHead;
   const changelogContext = {

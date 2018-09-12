@@ -1,3 +1,5 @@
+import {Review} from "./review";
+
 export interface User {
   name: string;
   email: string;
@@ -37,4 +39,5 @@ export interface Commit {
   subject: string;
   tree: Hash;
   type: string;
+  review: Review;
 }

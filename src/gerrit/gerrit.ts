@@ -4,6 +4,8 @@ import {GERRIT_HOST_CONFIG, parserOptions, writerOptionsConfig} from "./config";
 import {Commit} from "./@types/commit";
 import * as filter from 'conventional-commits-filter';
 import * as parser from 'conventional-commits-parser';
+import * as exaca from 'execa';
+import {Review} from "./@types/review";
 
 export class Gerrit {
   private fileReader = new FileReader(__dirname);
@@ -34,5 +36,18 @@ export class Gerrit {
         })
       }
     }));
+  }
+
+  async getReviewData(commits: Commit[]): Promise<Commit[]> {
+    return exaca('git', ['ls-remote']).then((r) => {
+      const remotes: Map<string, string> = new Map(r.stdout.split('\n').map(line => line.split('\t')));
+      commits.forEach(commit => {
+        const remoteData = remotes.get(commit.hash).split('/');
+        commit.review = {
+          changeNumber: Number(remoteData[remoteData.length - 2]),
+          patchSet: Number(remoteData[remoteData.length - 1])
+        } as Review;
+      })
+    });
   }
 }
