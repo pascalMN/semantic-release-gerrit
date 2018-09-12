@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "sourceMap": false,
+    "sourceMap": true,
     "outDir": "dist",
-    "rootDir": ".",
-    "baseUrl": ".",
     "moduleResolution": "node",
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "lib": ["dom", "es2017"]
   },
+  "compileOnSave": true,
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/gerrit/@types"
   ]
 }

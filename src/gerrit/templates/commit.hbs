@@ -1,0 +1,17 @@
+*{{#if scope}} **{{scope}}:**
+{{~/if}} {{#if subject}}
+  {{~subject}}
+{{~else}}
+  {{~header}}
+{{~/if}}
+
+{{~!-- commit link --}} {{#if review~}}
+  ([{{hash}}](
+  {{~#if @root.gerrit}}
+    {{~@root.gerrit}}
+  {{~/if}}/
+  {{~@root.commit}}/{{review.changeNumber}}/{{review.patchSet}}))
+{{~else}}
+  {{~hash}}
+{{~/if}}
+

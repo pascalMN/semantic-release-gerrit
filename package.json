@@ -4,15 +4,27 @@
   "license": "MIT",
   "main": "public_api.js",
   "scripts": {
-    "build": "tsc --build tsconfig.json && npm run copy:package.json",
+    "build": "tsc --build tsconfig.json && npm run copy:templates && npm run copy:package.json",
+    "build:watch": "tsc --build tsconfig.json --watch & npm run copy:templates:watch",
     "clean": "rimraf dist",
+    "copy:templates": "cpx src/gerrit/templates/**/*.hbs dist/src/gerrit/templates",
+    "copy:templates:watch": "cpx src/gerrit/templates/**/*.hbs dist/src/gerrit/templates --watch",
     "copy:package.json": "copy-pkg package.json dist/package.json --only name,version,license,main",
     "semantic-release": "semantic-release",
     "test": "echo \"TODO: add tests\""
   },
   "devDependencies": {
+    "@types/node": "^10.9.4",
+    "compare-func": "^1.3.2",
+    "conventional-changelog-writer": "^4.0.0",
+    "conventional-commits-filter": "^2.0.0",
+    "conventional-commits-parser": "^3.0.0",
     "copy-pkg": "^1.0.0",
+    "cpx": "^1.5.0",
+    "get-stream": "^4.0.0",
+    "into-stream": "^3.1.0",
     "rimraf": "^2.6.2",
+    "rxjs": "^6.3.1",
     "semantic-release": "^15.9.9",
     "typescript": "^3.0.1"
   },
