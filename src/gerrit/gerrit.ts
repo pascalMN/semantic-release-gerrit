@@ -38,6 +38,14 @@ export class Gerrit {
     }));
   }
 
+  getGerritUrl(context): string {
+    const gerritPlugin = context.options.generateNotes.find(plugin => plugin.gerritUrl);
+    if (gerritPlugin) {
+      return gerritPlugin.gerritUrl;
+    }
+    //TODO: generate gerrit url base on repository url
+  }
+
   async getReviewData(commits: Commit[]): Promise<Commit[]> {
     return exaca('git', ['ls-remote']).then((r) => {
       const remotes: Map<string, string> = new Map(r.stdout.split('\n').map(line => line.split('\t')));

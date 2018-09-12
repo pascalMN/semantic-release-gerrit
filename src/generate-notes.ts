@@ -21,7 +21,7 @@ export const generateNotes = async (pluginConfig: any, context: any) => {
   const currentTag = nextRelease.gitTag || nextRelease.gitHead;
   const changelogContext = {
     version: nextRelease.version,
-    gerrit: 'http://localhost:8080',
+    gerrit: gerrit.getGerritUrl(context),
     previousTag,
     currentTag,
     commit: '#/c',
