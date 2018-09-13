@@ -4,6 +4,7 @@ import {Commit} from "./gerrit/@types/commit";
 import * as getStream from "get-stream";
 import * as intoStream from "into-stream";
 import * as writer from "conventional-changelog-writer";
+import {GERRIT_HOST_CONFIG} from "./gerrit/config";
 
 export const generateNotes = async (pluginConfig: any, context: any) => {
   const gerrit: Gerrit = new Gerrit();
@@ -24,7 +25,7 @@ export const generateNotes = async (pluginConfig: any, context: any) => {
     gerrit: gerrit.getGerritUrl(context),
     previousTag,
     currentTag,
-    commit: '#/c',
+    commit: GERRIT_HOST_CONFIG.commit,
     linkCompare: currentTag && previousTag,
   };
 

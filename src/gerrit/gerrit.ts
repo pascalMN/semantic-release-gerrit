@@ -48,7 +48,13 @@ export class Gerrit {
 
   async getReviewData(commits: Commit[]): Promise<Commit[]> {
     return exaca('git', ['ls-remote']).then((r) => {
-      const remotes: Map<string, string> = new Map(r.stdout.split('\n').map(line => line.split('\t')));
+      const regexp = new RegExp('refs\\/changes\\/\\d*\\/\\d*\\/\\d*$');
+      const remotes: Map<string, string> = new Map(r
+        .stdout
+        .split('\n')
+        .map(line => line.split('\t'))
+        .filter(line => line[1].match(regexp))
+      );
       commits.forEach(commit => {
         try {
           const remoteData = remotes.get(commit.hash).split('/');

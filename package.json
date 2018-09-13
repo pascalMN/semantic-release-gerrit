@@ -1,7 +1,14 @@
 {
   "name": "semantic-release-gerrit",
+  "author": "Mateusz Nikiel <pascal.nikiel@gmail.com> (pascal.nikiel@gmail.com)",
+  "description": "Gerrit release notes generator plugin for semantic-release",
   "private": false,
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pascalMN/semantic-release-gerrit.git"
+  },
+  "homepage": "https://github.com/pascalMN/semantic-release-gerrit",
   "main": "public_api.js",
   "scripts": {
     "build": "tsc --build tsconfig.json && npm run copy:templates && npm run copy:package.json",
@@ -10,9 +17,12 @@
     "clean": "rimraf dist",
     "copy:templates": "cpx src/gerrit/templates/**/*.hbs dist/src/gerrit/templates",
     "copy:templates:watch": "cpx src/gerrit/templates/**/*.hbs dist/src/gerrit/templates --watch",
-    "copy:package.json": "copy-pkg package.json dist/package.json --only name,version,license,main,homepage",
+    "copy:package.json": "copy-pkg package.json dist/package.json --only name,version,license,main,homepage,author,description,dependencies",
     "semantic-release": "semantic-release",
     "test": "echo \"TODO: add tests\""
+  },
+  "dependencies": {
+    "rxjs": "^6.3.1"
   },
   "devDependencies": {
     "@types/node": "^10.9.4",
@@ -25,13 +35,7 @@
     "get-stream": "^4.0.0",
     "into-stream": "^3.1.0",
     "rimraf": "^2.6.2",
-    "rxjs": "^6.3.1",
     "semantic-release": "^15.9.9",
     "typescript": "^3.0.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pascalMN/semantic-release-gerrit.git"
-  },
-  "homepage": "https://github.com/pascalMN/semantic-release-gerrit"
+  }
 }
