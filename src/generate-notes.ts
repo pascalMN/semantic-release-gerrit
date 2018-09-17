@@ -27,6 +27,7 @@ export const generateNotes = async (pluginConfig: any, context: any) => {
     currentTag,
     commit: GERRIT_HOST_CONFIG.commit,
     linkCompare: currentTag && previousTag,
+    projectName: gerrit.getProjectName(context)
   };
 
   return getStream(intoStream.obj(parsedCommits).pipe(writer(changelogContext, config.writer)));
