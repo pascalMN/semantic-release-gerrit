@@ -46,6 +46,11 @@ export class Gerrit {
     //TODO: generate gerrit url base on repository url
   }
 
+  getProjectName(context): string {
+    const tokens = context.options.repositoryUrl.split('/');
+    return tokens[tokens.length - 1];
+  }
+
   async getReviewData(commits: Commit[]): Promise<Commit[]> {
     return exaca('git', ['ls-remote']).then((r) => {
       const regexp = new RegExp('refs\\/changes\\/\\d*\\/\\d*\\/\\d*$');
