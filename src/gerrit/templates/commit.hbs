@@ -5,13 +5,13 @@
   {{~header}}
 {{~/if}}
 
-{{~!-- commit link --}} {{#if review~}}
-  ([{{hash}}](
-  {{~#if @root.gerrit}}
-    {{~@root.gerrit}}
-  {{~/if}}/
-  {{~@root.commit}}/{{review.changeNumber}}/{{review.patchSet}}))
+{{~#if review}}
+  {{#if @root.gerrit}}
+    ([{{~hash}}]({{@root.gerrit}}/{{~@root.commit}}/{{review.changeNumber}}/{{review.patchSet}}))
+  {{~else}}
+    ({{~hash}})
+  {{/if}}
 {{~else}}
-  {{~hash}}
+  ({{~hash}})
 {{~/if}}
 

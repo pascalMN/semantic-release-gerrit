@@ -8,6 +8,7 @@ import * as exaca from 'execa';
 import {Review} from "./@types/review";
 
 export class Gerrit {
+  static DEFAULT_PORT = 8080;
   private fileReader = new FileReader(__dirname);
 
   async loadConfig(): Promise<Config> {
@@ -43,7 +44,9 @@ export class Gerrit {
     if (gerritPlugin) {
       return gerritPlugin.gerritUrl;
     }
-    //TODO: generate gerrit url base on repository url
+    const tokens: string[] = context.options.repositoryUrl.split('@');
+    const host = tokens[1].slice(0, tokens[1].search(':'));
+    return `http://${host}:${Gerrit.DEFAULT_PORT}`;
   }
 
   getProjectName(context): string {
