@@ -23,6 +23,7 @@ export const generateNotes = async (pluginConfig: any, context: any) => {
   const changelogContext = {
     version: nextRelease.version,
     gerrit: gerrit.getGerritUrl(context),
+    issues: gerrit.getIssuesUrl(context),
     previousTag,
     currentTag,
     commit: GERRIT_HOST_CONFIG.commit,

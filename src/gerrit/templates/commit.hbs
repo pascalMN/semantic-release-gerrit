@@ -14,4 +14,11 @@
 {{~else}}
   ({{~hash}})
 {{~/if}}
+{{#each references}}
+  {{~#if @root.issues}}
+    {{action}} [{{prefix}}{{issue}}]({{@root.issues}}/{{issue}})
+  {{else}}
+    {{raw}}
+  {{~/if}}
+{{/each}}
 

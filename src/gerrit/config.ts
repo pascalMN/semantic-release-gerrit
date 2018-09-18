@@ -48,15 +48,11 @@ export const writerOptionsConfig: ConfigWriterOptions = {
     }
 
     if (typeof commit.subject === `string`) {
-      let url = context.repository
-        ? `${context.host}/${context.owner}/${context.repository}`
-        : context.repoUrl;
+      let url = context.issues;
       if (url) {
-        url = `${url}/issues/`;
-        // Issue URLs.
         commit.subject = commit.subject.replace(/#([0-9]+)/g, (_, issue) => {
           issues.push(issue);
-          return `[#${issue}](${url}${issue})`
+          return `[#${issue}](${url}/${issue})`
         })
       }
       if (context.host) {
@@ -109,3 +105,5 @@ export const GERRIT_HOST_CONFIG: HostConfig = {
     "resolving",
   ]
 };
+
+GERRIT_HOST_CONFIG.referenceActions.push(...GERRIT_HOST_CONFIG.referenceActions.map(action => `${action}:`));
