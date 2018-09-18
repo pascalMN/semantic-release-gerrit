@@ -5,6 +5,7 @@ import * as getStream from "get-stream";
 import * as intoStream from "into-stream";
 import * as writer from "conventional-changelog-writer";
 import {GERRIT_HOST_CONFIG} from "./gerrit/config";
+import {Context} from "./gerrit/@types/context";
 
 export const generateNotes = async (pluginConfig: any, context: any) => {
   const gerrit: Gerrit = new Gerrit();
@@ -20,7 +21,7 @@ export const generateNotes = async (pluginConfig: any, context: any) => {
 
   const previousTag = lastRelease.gitTag || lastRelease.gitHead;
   const currentTag = nextRelease.gitTag || nextRelease.gitHead;
-  const changelogContext = {
+  const changelogContext: Partial<Context> = {
     version: nextRelease.version,
     gerrit: gerrit.getGerritUrl(context),
     issues: gerrit.getIssuesUrl(context),

@@ -12,4 +12,6 @@ export interface Context {
   repository: string;
   version: string;
   repoUrl: string;
+  gerrit: string;
+  projectName: string;
 }
