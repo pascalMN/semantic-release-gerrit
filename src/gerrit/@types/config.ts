@@ -32,3 +32,9 @@ export interface HostConfig {
   issuePrefixes: string[];
   referenceActions: string[];
 }
+
+export interface PluginConfig {
+  path: string;
+  gerritUrl?: string;
+  issuesUrl?: string;
+}

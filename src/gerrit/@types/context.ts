@@ -4,6 +4,7 @@ export interface Context {
   date: string;
   host: string;
   issue: string;
+  issues: string;
   linkCompare: string;
   linkReference: string;
   owner: string;

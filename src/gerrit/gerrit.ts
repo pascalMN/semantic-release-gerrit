@@ -1,4 +1,4 @@
-import {Config, ParserOptions, WriterOptions} from "./@types/config";
+import {Config, ParserOptions, PluginConfig, WriterOptions} from "./@types/config";
 import {FileReader} from "./utils/file-reader";
 import {GERRIT_HOST_CONFIG, parserOptions, writerOptionsConfig} from "./config";
 import {Commit} from "./@types/commit";
@@ -9,6 +9,7 @@ import {Review} from "./@types/review";
 
 export class Gerrit {
   static DEFAULT_PORT = 8080;
+  static PLUGIN_NAME = 'semantic-release-gerrit';
   private fileReader = new FileReader(__dirname);
 
   async loadConfig(): Promise<Config> {
@@ -40,7 +41,7 @@ export class Gerrit {
   }
 
   getGerritUrl(context): string {
-    const gerritPlugin = context.options.generateNotes.find(plugin => plugin.gerritUrl);
+    const gerritPlugin: PluginConfig = this.getGerritPlugin(context);
     if (gerritPlugin) {
       return gerritPlugin.gerritUrl;
     }
@@ -53,6 +54,12 @@ export class Gerrit {
     const tokens = context.options.repositoryUrl.split('/');
     return tokens[tokens.length - 1];
   }
+
+  getIssuesUrl(context): string {
+    const gerritPlugin: PluginConfig = this.getGerritPlugin(context);
+    return gerritPlugin.issuesUrl;
+  }
+
 
   async getReviewData(commits: Commit[]): Promise<Commit[]> {
     return exaca('git', ['ls-remote']).then((r) => {
@@ -75,5 +82,10 @@ export class Gerrit {
         }
       })
     });
+  }
+
+  private getGerritPlugin(context): PluginConfig {
+    return context.options.generateNotes.find(plugin =>
+      plugin === Gerrit.PLUGIN_NAME || plugin.path === Gerrit.PLUGIN_NAME)
   }
 }
