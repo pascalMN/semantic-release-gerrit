@@ -11,13 +11,15 @@
   "homepage": "https://github.com/pascalMN/semantic-release-gerrit",
   "main": "public_api.js",
   "scripts": {
-    "build": "tsc --build tsconfig.json && npm run copy:templates && npm run copy:package.json",
-    "build:dev": "tsc --build tsconfig-dev.json && npm run copy:templates && npm run copy:package.json",
+    "build": "tsc --build tsconfig.json && npm run copy",
+    "build:dev": "tsc --build tsconfig-dev.json && npm run copy",
     "build:watch": "tsc --build tsconfig-dev.json --watch & npm run copy:templates:watch",
-    "clean": "rimraf dist",
+    "copy": "npm run copy:templates && npm run copy:package.json && npm run copy:readme",
     "copy:templates": "cpx src/gerrit/templates/**/*.hbs dist/src/gerrit/templates",
     "copy:templates:watch": "cpx src/gerrit/templates/**/*.hbs dist/src/gerrit/templates --watch",
     "copy:package.json": "copy-pkg package.json dist/package.json --ignore scripts,devDependencies",
+    "copy:readme": "cpx README.md dist",
+    "clean": "rimraf dist",
     "semantic-release": "semantic-release",
     "test": "echo \"TODO: add tests\""
   },
