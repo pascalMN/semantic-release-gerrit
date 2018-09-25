@@ -42,5 +42,12 @@
   },
   "peerDependencies": {
     "semantic-release": "^15.8.0"
-  }
+  },
+  "keywords": [
+    "gerrit",
+    "semantic-release",
+    "semantic-release-plugin",
+    "conventional-changelog",
+    "changelog"
+  ]
 }
